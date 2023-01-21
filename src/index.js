@@ -1,16 +1,17 @@
 export const SequenceC = (A, B) => {
   let C = [];
   const count = {};
-  const result = [];
 
-  const isPrime = (num) => {
-    for (let i = 2; i <= Math.sqrt(num); i++) {
-      if (num % i === 0) {
+  const isPrime = (p) => {
+    if (!p || p < 2) return false;
+    for (let i = 2; i <= Math.sqrt(p); i++) {
+      if (p % i === 0) {
         return false;
       }
     }
     return true;
   };
+  // Time complexity O(sqrt(n))
 
   B.forEach((e) => {
     if (count[e]) {
@@ -19,12 +20,7 @@ export const SequenceC = (A, B) => {
     }
     count[e] = 1;
   });
+  //  Time complexity O(n)
 
-  for (let p in count) {
-    if (count[p] >= 2 && isPrime(count[p])) {
-      result.push(Number(p));
-    }
-  }
-
-  return (C = A.filter((item) => !result.includes(item)));
+  return (C = A.filter((el) => !isPrime(count[el])));
 };
